@@ -1,5 +1,68 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
 
+Présentation générale
+library-api est une API backend développée avec Next.js (App Router) et Prisma pour la gestion d’une bibliothèque de livres.
+Elle permet de créer, lire, mettre à jour, supprimer et liker des livres, et de servir ces données à un front-end (par exemple Angular).
+
+Structure des fichiers principaux
+route.ts
+Contient les handlers API pour les opérations CRUD sur les livres :
+
+GET : liste tous les livres
+POST : ajoute un livre
+PATCH : met à jour un livre (ex : like)
+DELETE : supprime un livre
+OPTIONS : gère le CORS
+route.ts
+Permet de récupérer un livre par son identifiant (id) via une requête POST.
+
+schema.prisma
+Définit le modèle de données avec Prisma.
+Exemple du modèle Livre :
+
+model Livre {
+  id          Int      @id @default(autoincrement())
+  titre       String
+  auteur      String
+  resume      String
+  publication DateTime
+  couverture  String?
+  liked       Boolean  @default(false)
+}
+
+/generated/prisma/
+Contient le client Prisma généré automatiquement pour interagir avec la base de données.
+
+/prisma/migrations/
+Dossier contenant l’historique des migrations de la base de données.
+
+Fonctionnalités principales
+CRUD sur les livres :
+Ajouter, modifier, supprimer, lister les livres.
+Like/Dislike :
+Possibilité de liker un livre (champ liked).
+Recherche par ID :
+Récupérer un livre précis via son identifiant.
+Upload de couverture (si route /api/upload présente).
+Gestion du CORS :
+Les headers nécessaires sont ajoutés pour permettre les requêtes depuis le front-end (ex : Angular sur localhost:4200).
+Technologies utilisées
+Next.js (API routes, App Router)
+Prisma (ORM pour la base de données, ici SQLite)
+TypeScript
+SQLite (par défaut, configurable)
+Utilisation
+Démarrage :
+Lancer le serveur Next.js (npm run dev ou yarn dev).
+Migrations :
+Utiliser Prisma pour appliquer les changements de schéma (npx prisma migrate dev).
+Connexion front-end :
+Le front (ex : Angular) consomme les routes API exposées sur http://localhost:3000/api/livres.
+Résumé
+library-api est une API REST moderne pour gérer une bibliothèque de livres, avec persistance des données, gestion des likes, et interfaçable facilement avec un front-end moderne.
+Elle est conçue pour être simple à étendre et à maintenir.
+
+
 ## Getting Started
 
 First, run the development server:
