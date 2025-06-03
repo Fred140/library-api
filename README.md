@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
-
 Présentation générale
 library-api est une API backend développée avec Next.js (App Router) et Prisma pour la gestion d’une bibliothèque de livres.
 Elle permet de créer, lire, mettre à jour, supprimer et liker des livres, et de servir ces données à un front-end (par exemple Angular).
@@ -7,6 +5,16 @@ Elle permet de créer, lire, mettre à jour, supprimer et liker des livres, et d
 Structure des fichiers principaux
 route.ts
 Contient les handlers API pour les opérations CRUD sur les livres :
+
+model Livre {
+  id          Int      @id @default(autoincrement())
+  titre       String
+  auteur      String
+  resume      String
+  publication DateTime
+  couverture  String?
+  liked       Boolean  @default(false)
+}
 
 GET : liste tous les livres
 POST : ajoute un livre
@@ -19,16 +27,6 @@ Permet de récupérer un livre par son identifiant (id) via une requête POST.
 schema.prisma
 Définit le modèle de données avec Prisma.
 Exemple du modèle Livre :
-
-model Livre {
-  id          Int      @id @default(autoincrement())
-  titre       String
-  auteur      String
-  resume      String
-  publication DateTime
-  couverture  String?
-  liked       Boolean  @default(false)
-}
 
 /generated/prisma/
 Contient le client Prisma généré automatiquement pour interagir avec la base de données.
@@ -61,6 +59,9 @@ Le front (ex : Angular) consomme les routes API exposées sur http://localhost
 Résumé
 library-api est une API REST moderne pour gérer une bibliothèque de livres, avec persistance des données, gestion des likes, et interfaçable facilement avec un front-end moderne.
 Elle est conçue pour être simple à étendre et à maintenir.
+
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
 
 
 ## Getting Started
